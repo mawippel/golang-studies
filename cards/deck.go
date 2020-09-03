@@ -12,7 +12,7 @@ func newDeck() deck {
 
 	for _, suit := range cardSuits {
 		for _, value := range cardValues {
-			cards = append(cards, suit+" of "+value)
+			cards = append(cards, value+" of "+suit)
 		}
 	}
 
@@ -23,4 +23,8 @@ func (cards deck) print() {
 	for _, card := range cards {
 		fmt.Println(card)
 	}
+}
+
+func deal(d deck, numberOfCards int) (deck, deck) {
+	return d[:numberOfCards], d[numberOfCards:]
 }
