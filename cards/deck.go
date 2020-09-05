@@ -1,6 +1,10 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"io/ioutil"
+	"strings"
+)
 
 // create a new type of deck which is a slice of strings
 type deck []string
@@ -25,6 +29,15 @@ func (cards deck) print() {
 	}
 }
 
+func (cards deck) toString() string {
+	return strings.Join([]string(cards), ",")
+}
+
 func deal(d deck, numberOfCards int) (deck, deck) {
 	return d[:numberOfCards], d[numberOfCards:]
+}
+
+func (cards deck) saveToFile(filename string) error {
+	cardsByteArray := []byte(cards.toString())
+	return ioutil.WriteFile(filename, cardsByteArray, 0666)
 }
